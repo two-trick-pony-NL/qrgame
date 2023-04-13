@@ -16,7 +16,6 @@ jobs:
   
   builddjango:
       name: 🚨 Prod Django
-      needs: [startnotification]
       runs-on: ubuntu-latest
       steps:
         - name: 🗂  Getting code from Github
@@ -43,37 +42,24 @@ jobs:
         - name: Installing dependancies
           run: |
             sudo pip3 install --upgrade pip
-            sudo pip3 install -r Infrastructure/requirements.txt
+            sudo pip3 install -r requirements.txt
         - name: 📦 Collecting all static files and Migrate
           run: |
-            python3 src/manage.py collectstatic --noinput
-            python3 src/manage.py makemigrations --noinput
-            python3 src/manage.py migrate --noinput
+            python3 manage.py collectstatic --noinput
+            python3 manage.py makemigrations --noinput
+            python3 manage.py migrate --noinput
         - name: 🐳 Create a Docker Container for DJANGO
-          run: docker build -t mapmaker:latest -f ./Infrastructure/Docker/DockerfilePROD .
+          run: docker build -t qrcodegame:latest .
         - name: 📬 Upload Backend image to AWS container register
           run: |
             service_name=${{ env.AWS_LIGHTSAIL_SERVICE_NAME }}
             aws lightsail push-container-image \
               --region ${{ env.AWS_REGION }} \
               --service-name ${service_name} \
-              --label mapmaker \
-              --image mapmaker:latest
+              --label qrcodegame \
+              --image qrcodegame:latest
         - name: =========== All done. Cleaning up ♻️  ===========
           run: ls
-        - name: Build Alerts
-          if: ${{ failure() }}
-          uses: appleboy/telegram-action@master
-          with:
-            to: ${{ secrets.TELEGRAM_CHAT }}
-            token: ${{ secrets.TELEGRAM_TOKEN }}
-            message: |
-              🚨 Deployment failed 🚨
-              Build ${{ github.run_id }} failed
-              Something went wrong while building the Django container
-              
-              See the details here:
-              ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
   
 
 
