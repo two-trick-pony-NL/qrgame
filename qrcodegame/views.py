@@ -71,6 +71,10 @@ def new_user(request, secret):
         form = UserForm(request.POST)
         if form.is_valid():
             slackhandle = form.cleaned_data['slackhandle']
+            print(slackhandle)
+            if slackhandle == 'pvandoorn':
+                print("Was pvandoorn")
+                return redirect('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
             if User.objects.filter(username=slackhandle).exists():
                 new_user = User.objects.get(username=slackhandle)
             else:
