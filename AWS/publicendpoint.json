@@ -8,4 +8,4 @@
     "intervalSeconds": 300,
     "path": "/healthcheck",
     "successCodes": "200-299"
-}
+}}

@@ -3,6 +3,8 @@ FROM python:3.10-buster
 
 # By default, listen on port
 EXPOSE 8000/tcp
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
 # Copy the dependencies file to the working directory
 COPY requirements.txt .
