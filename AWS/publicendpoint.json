@@ -1,12 +1,12 @@
 {
-  "containerName": "photoscavenger",
+  "containerName": "qrcodegame",
   "containerPort": 80,
   "healthCheck": {
     "healthyThreshold": 2,
     "unhealthyThreshold": 10,
     "timeoutSeconds": 60,
     "intervalSeconds": 300,
-    "path": "/healthcheck",
+    "path": "/admin",
     "successCodes": "200-299"
 }
 }
