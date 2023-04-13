@@ -7,3 +7,5 @@ django_extensions==3.2.1
 django-jsonfield==1.4.1
 qrcode
 uwsgi
+mysqlclient==2.1.1
+environ==1.0
