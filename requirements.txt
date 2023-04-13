@@ -6,3 +6,4 @@ django-tailwind==3.5.0
 django_extensions==3.2.1
 django-jsonfield==1.4.1
 qrcode
+uwsgi

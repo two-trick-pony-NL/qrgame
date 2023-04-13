@@ -13,4 +13,10 @@ RUN pip install -r requirements.txt
 # Copy the content of the local src directory to the working directory
 COPY . .
 # Specify the command to run on container start
-CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
+#CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
+RUN adduser --system --group --no-create-home uwsgi
+USER uwsgi
+CMD [ "uwsgi", "--http", "0.0.0.0:8000", \
+            "--uid", "uwsgi", \
+            "--protocol", "uwsgi", \
+            "--wsgi", "core.wsgi:application" ]

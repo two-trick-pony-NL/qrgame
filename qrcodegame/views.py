@@ -26,10 +26,10 @@ def index(request, secret):
             if form.is_valid():
                 answer = form.cleaned_data['answer'].lower()
                 adam = User.objects.get(username=request.user.username)
-                if answer == question.answer:
-                    correct = True
+                if question.answer in answer:
                     leaderboard_place = Leaderboard.objects.get(adam=adam)
                     current_score = leaderboard_place.score
+                    correct = True
                     if Answer.objects.filter(adam=adam, question=question, correct=True).exists():
                         new_score = current_score
                     else: 
