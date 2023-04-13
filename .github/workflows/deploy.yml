@@ -16,7 +16,6 @@ jobs:
 
   buildnginx:
     name: 🌎 building nginx webserver
-    needs: [startnotification]
     runs-on: ubuntu-latest
     steps:
       - name: 🗂  Getting code from Github
