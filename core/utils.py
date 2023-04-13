@@ -18,13 +18,16 @@ print("\n\n #### Creating QR CODES ####")
 print('0%')
 for i in question_list:
     secret = signer.sign(str(i.id))
-    url = HOST_URL +"/qr/"+ secret
+    url_live = HOST_URL +"/qr/"+ secret
+    url_dev = 'http://localhost:8000/qr/'+secret
     filename = i.riddle
     filename = filename.replace(",", "_")
     filename = filename.replace("/", "_")
     filename = filename.replace(' ', '-').lower()
     filename = filename[0:20]
-    generate_qr(url, filename)
+    generate_qr(url_live, filename)
     print(str(round(i.id/total*100))+"%")
-    print(url)
+    print(url_live)
+    print(url_dev)
+    print('\n')
 print("#### All done, starting server ####\n\n")
