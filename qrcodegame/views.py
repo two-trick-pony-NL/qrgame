@@ -71,6 +71,7 @@ def new_user(request, secret):
         form = UserForm(request.POST)
         if form.is_valid():
             slackhandle = form.cleaned_data['slackhandle']
+            slackhandle = slackhandle.lower()
             print(slackhandle)
             if slackhandle == 'pvandoorn':
                 print("Was pvandoorn")

@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 class Leaderboard(models.Model):
     adam = adam = models.OneToOneField(User, on_delete=models.CASCADE,primary_key=True,)
     score = models.IntegerField()
-    
 
     def __str__(self):
         return str(self.score) +"  "+ self.adam.username 
