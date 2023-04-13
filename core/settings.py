@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-q1gl@040w1_il^^4kw&q=a16ia^im5==a_-2rn7+5lw5=8y@!v
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['https://localhost','https://127.0.0.1' 'https://qrcodegame.vdotvo9a4e2a6.eu-central-1.cs.amazonlightsail.com', '*']
+CSRF_TRUSTED_ORIGINS = ['https://localhost','https://127.0.0.1' 'https://qrcodegame.vdotvo9a4e2a6.eu-central-1.cs.amazonlightsail.com']
 
 
 HOST_URL = 'https://qrcodegame.vdotvo9a4e2a6.eu-central-1.cs.amazonlightsail.com'
