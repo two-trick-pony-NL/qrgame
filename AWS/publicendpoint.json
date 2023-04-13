@@ -1,12 +1,12 @@
 {
   "containerName": "qrcodegame",
-  "containerPort": 80,
+  "containerPort": 8000,
   "healthCheck": {
     "healthyThreshold": 2,
     "unhealthyThreshold": 10,
     "timeoutSeconds": 60,
     "intervalSeconds": 300,
-    "path": "/admin",
+    "path": "/healthcheck",
     "successCodes": "200-299"
 }
 }
