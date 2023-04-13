@@ -100,3 +100,8 @@ def new_user(request, secret):
         else:
             form = UserForm()
             return render(request, 'slackhandle.html', {'form':form})
+        
+
+def random(request):
+    leaderboard = Leaderboard.objects.order_by('-score')[:10]
+    return render(request, 'random.html', {'leaderboard':leaderboard})
