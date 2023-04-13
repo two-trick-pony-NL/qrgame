@@ -31,3 +31,6 @@ for i in question_list:
     print(url_dev)
     print('\n')
 print("#### All done, starting server ####\n\n")
+
+
+generate_qr('https://petervandoorn.com', 'test')

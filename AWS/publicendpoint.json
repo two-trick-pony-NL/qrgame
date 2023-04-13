@@ -1,6 +1,6 @@
 {
   "containerName": "qrcodegame",
-  "containerPort": 80,
+  "containerPort": 8000,
   "healthCheck": {
     "healthyThreshold": 2,
     "unhealthyThreshold": 10,

@@ -28,7 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 
-HOST_URL = 'qrcodegame.vdotvo9a4e2a6.eu-central-1.cs.amazonlightsail.com:8000'
+HOST_URL = 'https://qrcodegame.vdotvo9a4e2a6.eu-central-1.cs.amazonlightsail.com'
 
 # Application definition
 

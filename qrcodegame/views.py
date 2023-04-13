@@ -7,6 +7,10 @@ from django.contrib.auth import authenticate, login
 from qrcodegame.models import Leaderboard
 from core.utils import signer
 
+def home(request):
+    return render(request, 'home.html')
+
+
 
 # Create your views here.
 def index(request, secret):

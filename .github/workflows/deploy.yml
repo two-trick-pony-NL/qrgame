@@ -15,7 +15,7 @@ concurrency:
 jobs:
   
   builddjango:
-      name: 🚨 Prod Django
+      name: 🚨 Deploying
       runs-on: ubuntu-latest
       steps:
         - name: 🗂  Getting code from Github
