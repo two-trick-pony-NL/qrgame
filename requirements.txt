@@ -9,3 +9,4 @@ qrcode
 uwsgi
 mysqlclient==2.1.1
 environ==1.0
+whitenoise

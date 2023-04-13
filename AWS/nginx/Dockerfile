@@ -6,6 +6,10 @@ FROM nginx:1.19.0-alpine
 # Adding temp file for cache
 RUN mkdir /tmp/nginx
 
+#Adding Django Static files into nginx so they dont have to be answered by Django
+COPY src/staticfiles/ ./static 
+COPY src/staticfiles/ ./staticfiles 
+
 
 #Specific settings so nginx works as a reverse proxy
 COPY AWS/nginx/default.conf ./etc/nginx/conf.d/default.conf
