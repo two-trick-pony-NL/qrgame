@@ -12,6 +12,11 @@ def home(request):
     return render(request, 'home.html', {'leaderboard':leaderboard})
 
 
+def test(request):
+    leaderboard = Leaderboard.objects.order_by('-score')[:10]
+    return render(request, 'test.html', {'leaderboard':leaderboard})
+
+
 
 # Create your views here.
 def index(request, secret):
