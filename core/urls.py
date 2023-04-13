@@ -19,7 +19,6 @@ from qrcodegame import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('/', views.home, name='welcome'),
     path('', views.home, name='wlcom'),
     path('qr/<str:secret>/', views.index, name='home'),
     path('registeruser/<str:secret>/', views.new_user, name='newuser')
