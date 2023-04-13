@@ -1,0 +1,3 @@
+{"qrcodegame": {
+  "image": ":qrcodegame.qrcodegame.latest",
+  "ports": {"80": "HTTP"}}}

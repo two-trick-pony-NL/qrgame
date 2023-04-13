@@ -1,0 +1,5 @@
+{
+    "serviceName": "qrcodegame",
+    "containerName": "qrcodegame",
+    "filterPattern": "-ELB-HealthChecker -static"
+}
