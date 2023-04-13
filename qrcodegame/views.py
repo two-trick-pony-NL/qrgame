@@ -7,23 +7,20 @@ from django.contrib.auth import authenticate, login
 from qrcodegame.models import Leaderboard
 from core.utils import signer
 
-def get_user_position_leaderboard(request):
-    leaderboard = Leaderboard.objects.order_by('-score')
+def get_user_position_leaderboard(request, all_scores):
     j = 0
     username = request.user.username
-    print(username)
-    for i in leaderboard:
+    for i in all_scores:
         j = j + 1
-        print(i.adam)
         if str(username) == str(i.adam):
             return j
         else:
-            return 'unknown'
+            pass
 
 
 def home(request):
     leaderboard = Leaderboard.objects.order_by('-score')
-    your_place = get_user_position_leaderboard(request)
+    your_place = get_user_position_leaderboard(request, leaderboard)
     leaderboard = leaderboard[:10]
     return render(request, 'home.html', {'leaderboard':leaderboard, 'your_place':your_place})
 
@@ -31,8 +28,6 @@ def home(request):
 # Create your views here.
 def index(request, secret):
     leaderboard = Leaderboard.objects.order_by('-score')
-    your_place = get_user_position_leaderboard(request)
-    leaderboard = leaderboard[:10]
     string = signer.sign(1)
     print(string)
     id = signer.unsign(secret)
@@ -72,6 +67,8 @@ def index(request, secret):
                     question.solvecount =+ 1
                     question.save()
                 score = Leaderboard.objects.get(adam=adam)
+                your_place = get_user_position_leaderboard(request, leaderboard)
+                leaderboard = leaderboard[:10]
                 return render(request, 'success.html', {'correct': correct, 'score':score.score, 'id':secret, 'leaderboard':leaderboard, 'your_place':your_place})
         else: 
             form = QuestionForm()
