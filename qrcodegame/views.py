@@ -7,20 +7,32 @@ from django.contrib.auth import authenticate, login
 from qrcodegame.models import Leaderboard
 from core.utils import signer
 
+def get_user_position_leaderboard(request):
+    leaderboard = Leaderboard.objects.order_by('-score')
+    j = 0
+    username = request.user.username
+    print(username)
+    for i in leaderboard:
+        j = j + 1
+        print(i.adam)
+        if str(username) == str(i.adam):
+            return j
+        else:
+            return 'unknown'
+
+
 def home(request):
-    leaderboard = Leaderboard.objects.order_by('-score')[:10]
-    return render(request, 'home.html', {'leaderboard':leaderboard})
-
-
-def test(request):
-    leaderboard = Leaderboard.objects.order_by('-score')[:10]
-    return render(request, 'test.html', {'leaderboard':leaderboard})
-
+    leaderboard = Leaderboard.objects.order_by('-score')
+    your_place = get_user_position_leaderboard(request)
+    leaderboard = leaderboard[:10]
+    return render(request, 'home.html', {'leaderboard':leaderboard, 'your_place':your_place})
 
 
 # Create your views here.
 def index(request, secret):
-    leaderboard = Leaderboard.objects.order_by('-score')[:10]
+    leaderboard = Leaderboard.objects.order_by('-score')
+    your_place = get_user_position_leaderboard(request)
+    leaderboard = leaderboard[:10]
     string = signer.sign(1)
     print(string)
     id = signer.unsign(secret)
@@ -60,7 +72,7 @@ def index(request, secret):
                     question.solvecount =+ 1
                     question.save()
                 score = Leaderboard.objects.get(adam=adam)
-                return render(request, 'success.html', {'correct': correct, 'score':score.score, 'id':secret, 'leaderboard':leaderboard})
+                return render(request, 'success.html', {'correct': correct, 'score':score.score, 'id':secret, 'leaderboard':leaderboard, 'your_place':your_place})
         else: 
             form = QuestionForm()
         return render(request, 'question.html', {'form': form, 'id':id, 'question':question.riddle})
