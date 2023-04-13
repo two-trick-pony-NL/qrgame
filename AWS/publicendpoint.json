@@ -1,5 +1,5 @@
 {
-  "containerName": "qrcodegame",
+  "containerName": "qrcodegame-nginx",
   "containerPort": 80,
   "healthCheck": {
     "healthyThreshold": 2,
