@@ -50,7 +50,7 @@ jobs:
             service_name=${{ env.AWS_LIGHTSAIL_SERVICE_NAME }}
             aws lightsail push-container-image \
               --region ${{ env.AWS_REGION }} \
-              --service-name ${service_name} \
+              --service-name ${AWS_LIGHTSAIL_SERVICE_NAME} \
               --label qrcodegame \
               --image qrcodegame:latest
         - name: 🚀 Launching the Containers
