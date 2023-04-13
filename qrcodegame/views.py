@@ -8,12 +8,14 @@ from qrcodegame.models import Leaderboard
 from core.utils import signer
 
 def home(request):
-    return render(request, 'home.html')
+    leaderboard = Leaderboard.objects.order_by('-score')[:10]
+    return render(request, 'home.html', {'leaderboard':leaderboard})
 
 
 
 # Create your views here.
 def index(request, secret):
+    leaderboard = Leaderboard.objects.order_by('-score')[:10]
     string = signer.sign(1)
     print(string)
     id = signer.unsign(secret)
@@ -53,7 +55,7 @@ def index(request, secret):
                     question.solvecount =+ 1
                     question.save()
                 score = Leaderboard.objects.get(adam=adam)
-                return render(request, 'success.html', {'correct': correct, 'score':score.score, 'id':secret})
+                return render(request, 'success.html', {'correct': correct, 'score':score.score, 'id':secret, 'leaderboard':leaderboard})
         else: 
             form = QuestionForm()
         return render(request, 'question.html', {'form': form, 'id':id, 'question':question.riddle})
