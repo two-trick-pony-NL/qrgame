@@ -10,7 +10,6 @@ class Question(models.Model):
     riddle = models.CharField(unique=False, blank=True, max_length=250)
     answer = models.CharField(unique=False, blank=True, max_length=250)
     secondary_answer = models.CharField(unique=False, blank=True, max_length=250)
-    question = models.CharField(unique=False, blank=True, max_length=250)
 
     def __str__(self):
         return self.riddle
@@ -18,7 +17,7 @@ class Question(models.Model):
 class Answer(models.Model):
     date_modified = models.DateTimeField(auto_now=True)
     date_created = models.DateTimeField(default=timezone.now, editable=False)
-    question = models.ForeignKey(Question, on_delete=models.DO_NOTHING, null=True, related_name = 'related_question')
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, null=True, related_name = 'related_question')
     answer = models.TextField(unique=False, blank=True)
     correct = models.BooleanField()
     adam = models.OneToOneField(
