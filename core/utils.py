@@ -9,10 +9,9 @@ from PIL import ImageDraw, ImageFont
 
 signer = Signer()
 font = ImageFont.truetype('Roboto-Black.ttf', 40)
-#question_list = Question.objects.all()
-#total = question_list.count()
-question_list = 4
-total = 3
+question_list = Question.objects.all()
+total = question_list.count()
+
 
 def generate_qr(url, name, qrcode_number):
     img = qrcode.make(str(url))
@@ -23,7 +22,7 @@ def generate_qr(url, name, qrcode_number):
 
 
 
-"""print("\n\n #### Creating QR CODES ####")
+print("\n\n #### Creating QR CODES ####")
 print('0%')
 for i in question_list:
     secret = signer.sign(str(i.id))
@@ -39,4 +38,4 @@ for i in question_list:
     print(url_live)
     print(url_dev)
     print('\n')
-print("#### All done, starting server ####\n\n")"""
+print("#### All done, starting server ####\n\n")
