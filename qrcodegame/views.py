@@ -43,9 +43,9 @@ def index(request, secret):
         if request.method == 'POST':
             form = QuestionForm(request.POST)
             if form.is_valid():
-                answer = form.cleaned_data['answer'].lower()
+                answer = form.cleaned_data['answer']
                 adam = User.objects.get(username=request.user.username)
-                if question.answer in answer or question.secondary_answer in answer:
+                if question.answer.lower() in answer.lower() or question.secondary_answer.lower() in answer.lower():
                     leaderboard_place = Leaderboard.objects.get(adam=adam)
                     current_score = leaderboard_place.score
                     correct = True
