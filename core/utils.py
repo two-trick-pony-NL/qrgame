@@ -4,7 +4,6 @@ from .settings import HOST_URL
 from questions.models import Question
 
 # Importing the PIL library
-from PIL import Image
 from PIL import ImageDraw, ImageFont
 
 signer = Signer()
@@ -13,8 +12,13 @@ question_list = Question.objects.all()
 total = question_list.count()
 
 
+
+
 def generate_qr(url, name, qrcode_number):
-    img = qrcode.make(str(url))
+    qr = qrcode.QRCode(    )
+    qr.add_data(str(url))
+    qr.make()
+    img = qr.make_image()
     I1 = ImageDraw.Draw(img)
     # Add Text to an image
     I1.text((150, -3), 'QR: ' +str(qrcode_number)+ ' of '+str(total), font=font, fill=000)
