@@ -23,7 +23,9 @@ def home(request):
     leaderboard = Leaderboard.objects.order_by('-score')
     your_place = get_user_position_leaderboard(request, leaderboard)
     leaderboard = leaderboard[:10]
-    return render(request, 'home.html', {'leaderboard':leaderboard, 'your_place':your_place})
+    if request.user.is_authenticated:
+        answers = Answer.objects.filter(adam=request.user)
+    return render(request, 'home.html', {'leaderboard':leaderboard, 'your_place':your_place, 'answers':answers})
 
 
 # Create your views here.
