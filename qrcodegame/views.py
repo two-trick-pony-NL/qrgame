@@ -36,10 +36,10 @@ def home(request):
 # Create your views here.
 def index(request, secret):
     leaderboard = Leaderboard.objects.order_by('-score')
-    answers = Answer.objects.filter(adam=request.user)
-    answers = answers.order_by('-date_created')
     id = signer.unsign(secret)
     if request.user.is_authenticated:
+        answers = Answer.objects.filter(adam=request.user)
+        answers = answers.order_by('-date_created')
         question = Question.objects.get(id=id)
         if request.method == 'POST':
             form = QuestionForm(request.POST)
