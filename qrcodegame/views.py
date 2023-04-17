@@ -24,8 +24,10 @@ def home(request):
     your_place = get_user_position_leaderboard(request, leaderboard)
     leaderboard = leaderboard[:10]
     if request.user.is_authenticated:
+        your_place = get_user_position_leaderboard(request, leaderboard)
         answers = Answer.objects.filter(adam=request.user)
     else:
+        your_place = 'not'
         answers = None
     return render(request, 'home.html', {'leaderboard':leaderboard, 'your_place':your_place, 'answers':answers})
 
