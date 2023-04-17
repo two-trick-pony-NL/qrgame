@@ -36,8 +36,8 @@ def home(request):
 # Create your views here.
 def index(request, secret):
     leaderboard = Leaderboard.objects.order_by('-score')
-    string = signer.sign(1)
-    print(string)
+    answers = Answer.objects.filter(adam=request.user)
+    answers = answers.order_by('-date_created')
     id = signer.unsign(secret)
     if request.user.is_authenticated:
         question = Question.objects.get(id=id)
@@ -77,10 +77,10 @@ def index(request, secret):
                 score = Leaderboard.objects.get(adam=adam)
                 your_place = get_user_position_leaderboard(request, leaderboard)
                 leaderboard = leaderboard[:10]
-                return render(request, 'success.html', {'correct': correct, 'score':score.score, 'id':secret, 'leaderboard':leaderboard, 'your_place':your_place})
+                return render(request, 'success.html', {'correct': correct, 'score':score.score, 'id':secret, 'leaderboard':leaderboard, 'your_place':your_place,  'answers':answers})
         else: 
             form = QuestionForm()
-        return render(request, 'question.html', {'form': form, 'id':id, 'question':question.riddle,'type':question.question_type,})
+        return render(request, 'question.html', {'form': form, 'id':id, 'question':question.riddle,'type':question.question_type, 'answers':answers})
     else:
         return redirect('/registeruser/'+str(secret))
         
