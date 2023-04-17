@@ -1,0 +1,47 @@
+<style>
+  /*adding row numbers through css*/
+  .css-serial {
+      counter-reset: serial-number; /* Set the serial number counter to 0 */
+  }
+  
+      .css-serial td:first-child:before {
+          counter-increment: serial-number; /* Increment the serial number counter */
+          content: counter(serial-number); /* Display the counter */
+      }
+  
+  </style>
+
+<h2 class="mb-2 text-lg font-semibold text-gray-900 dark:text-white">Leaderboard:</h2>
+
+      <div class="relative overflow-x-auto">
+        <ol style="list-style: decimal inside;">
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 css-serial">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                  <th scope="col" class="px-6 py-3">Rank</th>
+
+                    <th scope="col" class="px-6 py-3">
+                        Name
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Score
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+              {% for leader in leaderboard %}
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                  <th cope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ forloop.counter }}</th>
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                      {{leader.adam}}
+                    </th>
+                    <td class="px-6 py-4">
+                      {{leader.score}}
+                    </td>
+                </tr>
+                {% endfor %}
+                
+            </tbody>
+        </table>
+      </ol>
+    </div>

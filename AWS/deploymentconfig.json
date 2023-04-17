@@ -1,0 +1,9 @@
+{"qrcodegame": {
+  "image": ":qrcodegame.qrcodegame.latest",
+  "ports": {"8000": "HTTP"}
+  },
+  "qrcodegame-nginx": {
+    "image": ":qrcodegame.nginx.latest",
+    "ports": {"80": "HTTP"}
+  }
+}
