@@ -89,7 +89,7 @@ jobs:
             envkey_MYSQL_ATTR_SSL_CA: ${{ secrets.MYSQL_ATTR_SSL_CA }}
             envkey_SECURE_SETTINGS: True
             envkey_DEBUG: false
-            directory: /core
+            directory: core
             file_name: .env
             fail_on_empty: false
         - name: Installing dependancies
