@@ -36,7 +36,7 @@ def generate_qr(url, name, qrcode_number, riddle):
     img_qr_big.save("./qrcodes/"+name+".png")
 
 
-
+"""
 print("\n\n #### Creating QR CODES ####")
 print('0%')
 for i in question_list:
@@ -52,4 +52,4 @@ for i in question_list:
     print(str(round(i.id/total*100))+"%")
 print(url_live)
 print(url_dev)
-print("#### All done, starting server ####\n\n")
+print("#### All done, starting server ####\n\n")"""
