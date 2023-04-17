@@ -8,4 +8,4 @@ class Leaderboard(models.Model):
     score = models.IntegerField()
 
     def __str__(self):
-        return str(self.score) +"  "+ self.adam.username 
+        return str(self.score) +"  "+ self.adam.username
