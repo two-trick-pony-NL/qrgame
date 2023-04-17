@@ -8,7 +8,7 @@ from PIL import ImageDraw, ImageFont, Image
 LOGO = Image.open('logo.png').resize((150,150))
 
 signer = Signer()
-font = ImageFont.truetype('Roboto-Black.ttf', 40)
+font = ImageFont.truetype('Roboto-Black.ttf', 80)
 question_list = Question.objects.all()
 total = question_list.count()
 
@@ -16,16 +16,20 @@ total = question_list.count()
 
 
 def generate_qr(url, name, qrcode_number):
-    qr = qrcode.QRCode(error_correction=qrcode.constants.ERROR_CORRECT_H)
+    qr = qrcode.QRCode(
+        error_correction=qrcode.constants.ERROR_CORRECT_H,
+        border=8,
+         version=12, )
     qr.add_data(str(url))
     qr.make()
     img_qr_big = qr.make_image().convert('RGB')
     pos = ((img_qr_big.size[0] - LOGO.size[0]) // 2, (img_qr_big.size[1] - LOGO.size[1]) // 2)
     img = qr.make_image()
     img_qr_big.paste(LOGO, pos)
-    I1 = ImageDraw.Draw(img)
+    I1 = ImageDraw.Draw(img_qr_big)
+
     # Add Text to an image
-    I1.text((150, -3), 'QR: ' +str(qrcode_number)+ ' of '+str(total), font=font, fill=000)
+    I1.text((220, -3), 'Riddle #' +str(qrcode_number), font=font, fill=000)
     img_qr_big.save("./qrcodes/"+name+".png")
 
 
