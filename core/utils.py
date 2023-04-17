@@ -50,7 +50,6 @@ for i in question_list:
     filename = filename[0:20]
     generate_qr(url_live, filename, i.id, i.riddle[0:38]+'...')
     print(str(round(i.id/total*100))+"%")
-    print(url_live)
-    print(url_dev)
-    print('\n')
+print(url_live)
+print(url_dev)
 print("#### All done, starting server ####\n\n")

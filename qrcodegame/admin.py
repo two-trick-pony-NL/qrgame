@@ -7,6 +7,9 @@ from .models import Leaderboard
 
 class ObjectAdmin(admin.ModelAdmin):
     ordering = ['-score']
+    list_filter = ('adam', 'score')
+
     
 
 admin.site.register(Leaderboard, ObjectAdmin)
+

@@ -31,14 +31,14 @@ def index(request, secret):
     string = signer.sign(1)
     print(string)
     id = signer.unsign(secret)
+    question = Question.objects.get(id=id)
     if request.user.is_authenticated:
-        question = Question.objects.get(id=id)
         if request.method == 'POST':
             form = QuestionForm(request.POST)
             if form.is_valid():
                 answer = form.cleaned_data['answer'].lower()
                 adam = User.objects.get(username=request.user.username)
-                if question.answer in answer or question.secondary_answer in answer:
+                if question.answer.lower() in answer or question.secondary_answer.lower() in answer:
                     leaderboard_place = Leaderboard.objects.get(adam=adam)
                     current_score = leaderboard_place.score
                     correct = True
@@ -72,7 +72,7 @@ def index(request, secret):
                 return render(request, 'success.html', {'correct': correct, 'score':score.score, 'id':secret, 'leaderboard':leaderboard, 'your_place':your_place})
         else: 
             form = QuestionForm()
-        return render(request, 'question.html', {'form': form, 'id':id, 'question':question.riddle})
+        return render(request, 'question.html', {'form': form, 'id':id, 'question':question.riddle, 'type': question.question_type})
     else:
         return redirect('/registeruser/'+str(secret))
         
