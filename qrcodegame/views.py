@@ -26,6 +26,7 @@ def home(request):
     if request.user.is_authenticated:
         your_place = get_user_position_leaderboard(request, leaderboard)
         answers = Answer.objects.filter(adam=request.user)
+        answers = answers.order_by('-date_created')
     else:
         your_place = 'not'
         answers = None
