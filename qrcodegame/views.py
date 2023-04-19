@@ -85,7 +85,7 @@ def index(request, secret):
                 return render(request, 'success.html', {'correct': correct, 'score':score.score, 'id':secret, 'leaderboard':leaderboard, 'your_place':your_place,  'answers':answers})
         else: 
             form = QuestionForm()
-        return render(request, 'question.html', {'form': form, 'id':id, 'question':question.riddle,'type':question.question_type, 'answers':answers})
+        return render(request, 'question.html', {'form': form, 'id':id, 'question':question.riddle, 'questionobject':question, 'type':question.question_type, 'answers':answers})
     else:
         return redirect('/registeruser/'+str(secret))
         

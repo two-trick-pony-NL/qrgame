@@ -24,6 +24,7 @@ class Question(models.Model):
     answer = models.CharField(unique=False, blank=True, max_length=250)
     secondary_answer = models.CharField(unique=False, blank=True, max_length=250, default='something random with oqeiwuweywe')
     question_type = models.CharField(max_length=20, choices=TYPE_CHOICES, default='none')
+    image = models.ImageField(null=True, blank=True)
 
     def __str__(self):
         return self.riddle
