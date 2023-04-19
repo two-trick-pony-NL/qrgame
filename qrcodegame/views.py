@@ -25,8 +25,8 @@ def home(request):
     leaderboard = leaderboard[:10]
     if request.user.is_authenticated:
         your_place = get_user_position_leaderboard(request, leaderboard)
-        answers = Answer.objects.filter(adam=request.user)
-        answers = answers.order_by('-date_created')
+        answers = Answer.objects.filter(adam=request.user, correct=True)
+        answers = answers.order_by('question_id')
     else:
         your_place = 'not'
         answers = None
@@ -49,31 +49,36 @@ def index(request, secret):
                 if question.answer.lower() in answer.lower() or question.secondary_answer.lower() in answer.lower():
                     leaderboard_place = Leaderboard.objects.get(adam=adam)
                     current_score = leaderboard_place.score
-                    correct = True
                     if Answer.objects.filter(adam=adam, question=question, correct=True).exists():
                         new_score = current_score
                     else: 
                         new_score = current_score + 1
+                        answer = Answer(
+                            question = question,
+                            correct = True,
+                            answer = form.cleaned_data['answer'],
+                            adam = adam
+                        )
+                        answer.save()
+                        
                     entry = Leaderboard(
                         adam = adam,
                         score = new_score    
                     )
                     entry.save()
+                    correct = True
                 else:
                     correct = False
-                answer = Answer(
-                    question = question,
-                    correct = correct,
-                    answer = form.cleaned_data['answer'],
-                    adam = adam
-                )
-                answer.save()
-                if answer == question.answer:
-                    print(answer)
-                    print(question.answer)
-                    print(question.solvecount)
-                    question.solvecount =+ 1
-                    question.save()
+                    if Answer.objects.filter(adam=adam, question=question, correct=False).exists():
+                        pass
+                    else:   
+                        answer = Answer(
+                            question = question,
+                            correct = False,
+                            answer = form.cleaned_data['answer'],
+                            adam = adam
+                        )
+                        answer.save()
                 score = Leaderboard.objects.get(adam=adam)
                 your_place = get_user_position_leaderboard(request, leaderboard)
                 leaderboard = leaderboard[:10]
