@@ -25,7 +25,7 @@ def home(request):
     leaderboard = leaderboard[:10]
     if request.user.is_authenticated:
         your_place = get_user_position_leaderboard(request, leaderboard)
-        answers = Answer.objects.filter(adam=request.user, correct=True)
+        answers = Answer.objects.filter(adam=request.user)
         answers = answers.order_by('question_id')
     else:
         your_place = 'not'
