@@ -33,7 +33,7 @@ def generate_qr(url, name, qrcode_number, riddle):
     # Add Text to an image
     I1.text((220, -3), 'Riddle #' +str(qrcode_number), font=font, fill=000)
     I2.text((0, 730), riddle, font=font_small, fill=000)
-    img_qr_big.save("./qrcodes/"+name+".png")
+    img_qr_big.save("./staticfiles/qrcodes/"+name+".png")
 
 
 

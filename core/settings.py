@@ -36,8 +36,8 @@ ALLOWED_HOSTS = ['*']
 CSRF_TRUSTED_ORIGINS = ['https://localhost','https://*.amazonlightsail.com','https://bunqqrcodegame.nl','https://127.0.0.1' 'https://qrcodegame.vdotvo9a4e2a6.eu-central-1.cs.amazonlightsail.com']
 
 
-HOST_URL = 'https://qrcodegame.vdotvo9a4e2a6.eu-central-1.cs.amazonlightsail.com'
-
+#HOST_URL = 'https://qrcodegame.vdotvo9a4e2a6.eu-central-1.cs.amazonlightsail.com'
+HOST_URL = 'https://bunqqrcodegame.nl'
 # Application definition
 
 INSTALLED_APPS = [
