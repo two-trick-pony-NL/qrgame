@@ -7,6 +7,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from qrcodegame.models import Leaderboard
 from core.utils import signer
+from django.views.decorators.cache import cache_page
+
 
 def get_user_position_leaderboard(request, all_scores):
     j = 0
@@ -18,7 +20,7 @@ def get_user_position_leaderboard(request, all_scores):
         else:
             pass
 
-
+cache_page(60 * 1)
 def home(request):
     leaderboard = Leaderboard.objects.order_by('-score')
     your_place = get_user_position_leaderboard(request, leaderboard)
@@ -34,6 +36,7 @@ def home(request):
 
 
 # Create your views here.
+cache_page(60 * 1)
 def index(request, secret):
     leaderboard = Leaderboard.objects.order_by('-score')
     id = signer.unsign(secret)
